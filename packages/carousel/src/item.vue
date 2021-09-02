@@ -72,7 +72,7 @@
         }
       },
 
-      calcCardTop(index, activeIndex) {
+      calcCardMarginTop(index, activeIndex) {
         if (this.inStage) {
           if (index === activeIndex) {
             return 'auto';
