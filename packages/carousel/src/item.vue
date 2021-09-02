@@ -38,6 +38,7 @@
       return {
         hover: false,
         translate: 0,
+        marginTop: 'auto',
         scale: 1,
         active: false,
         ready: false,
@@ -65,9 +66,23 @@
         if (this.inStage) {
           return parentWidth * ((2 - CARD_SCALE) * (index - activeIndex) + 1) / 4;
         } else if (index < activeIndex) {
-          return -(1 + CARD_SCALE) * parentWidth / 4;
+          return parentWidth * ((2 - CARD_SCALE) * (activeIndex - activeIndex) + 1) / 4;
         } else {
-          return (3 + CARD_SCALE) * parentWidth / 4;
+          return parentWidth * ((2 - CARD_SCALE) * (activeIndex - activeIndex) + 1) / 4;
+        }
+      },
+
+      calcCardTop(index, activeIndex) {
+        if (this.inStage) {
+          if (index === activeIndex) {
+            return 'auto';
+          } else {
+            return '-15%';
+          }
+        } else if (index < activeIndex) {
+          return '-35%';
+        } else {
+          return '-35%';
         }
       },
 
@@ -93,6 +108,7 @@
           this.inStage = Math.round(Math.abs(index - activeIndex)) <= 1;
           this.active = index === activeIndex;
           this.translate = this.calcCardTranslate(index, activeIndex);
+          this.marginTop = this.calcCardMarginTop(index, activeIndex);
           this.scale = this.active ? 1 : CARD_SCALE;
         } else {
           this.active = index === activeIndex;
@@ -121,7 +137,8 @@
         const translateType = this.parentDirection === 'vertical' ? 'translateY' : 'translateX';
         const value = `${translateType}(${ this.translate }px) scale(${ this.scale })`;
         const style = {
-          transform: value
+          transform: value,
+          marginTop: this.marginTop
         };
         return autoprefixer(style);
       }
