@@ -7,15 +7,16 @@
       'el-carousel__item--card': $parent.type === 'card',
       'is-in-stage': inStage,
       'is-hover': hover,
-      'is-animating': animating
+      'is-animating': animating,
     }"
     @click="handleItemClick"
-    :style="itemStyle">
+    :style="itemStyle"
+  >
     <div
       v-if="$parent.type === 'card'"
       v-show="!active"
-      class="el-carousel__mask">
-    </div>
+      class="el-carousel__mask"
+    ></div>
     <slot></slot>
   </div>
 </template>
@@ -75,14 +76,14 @@
       calcCardMarginTop(index, activeIndex) {
         if (this.inStage) {
           if (index === activeIndex) {
-            return 'auto';
+            return '10%';
           } else {
-            return '-15%';
+            return '0';
           }
         } else if (index < activeIndex) {
-          return '-35%';
+          return '-15%';
         } else {
-          return '-35%';
+          return '-15%';
         }
       },
 
